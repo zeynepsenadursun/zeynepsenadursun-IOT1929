@@ -1,0 +1,54 @@
+int kirmizi=D0; //d0
+int sari=D1;//d1
+int beyaz=D2;//d2
+
+#define BLYNK_PRINT Serial
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+int butondurumu=0;
+
+char auth[] = "sGZKKvXvlWzSFArNFdkEwEyz7x19hkuk";
+
+char ssid[] = "SUPERONLINE_WiFi_6374";
+char pass[] = "RNEHCU4JRRXF";
+
+BLYNK_WRITE(V1)
+{
+int pinValue = param.asInt();
+
+ if (pinValue==1){
+digitalWrite(kirmizi,HIGH);
+delay(5000);
+digitalWrite(kirmizi,LOW);
+digitalWrite(sari,HIGH);
+delay(5000);
+digitalWrite(sari,LOW);
+digitalWrite(beyaz,HIGH);
+delay(5000);
+digitalWrite(beyaz,LOW);
+butondurumu=1;
+}
+else {
+digitalWrite(kirmizi,LOW);
+digitalWrite(sari,LOW);
+digitalWrite(beyaz,LOW);
+butondurumu=0;
+}
+}
+
+void setup()
+{
+Serial.begin(9600);
+pinMode(kirmizi, OUTPUT);
+pinMode(sari, OUTPUT);
+pinMode(beyaz, OUTPUT);
+
+ Blynk.begin(auth, ssid, pass);
+
+}
+
+void loop()
+{
+Blynk.run();
+}

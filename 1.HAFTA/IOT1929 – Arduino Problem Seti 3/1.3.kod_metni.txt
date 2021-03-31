@@ -1,0 +1,25 @@
+#include "DHT.h"
+#define dhtSensorPin 2
+#define DHTTYPE DHT11
+DHT dht(dhtSensorPin, DHTTYPE);
+int celsiusOku;
+int fahrenheitOku;
+int kelvinOku;
+
+void setup()
+
+{
+ Serial.begin(9600);
+ dht.begin();
+}
+
+void loop()
+{
+   celsiusOku = dht.readTemperature();
+   fahrenheitOku = ((9/5*celsiusOku)+32);
+   kelvinOku = (celsiusOku+273);
+   Serial.println("Celsius Degeri: " + String(celsiusOku));
+   Serial.println("Fahrenheit Degeri: " + String(fahrenheitOku));
+   Serial.println("Kelvin Degeri: " + String(kelvinOku));
+   delay(2500);
+}  

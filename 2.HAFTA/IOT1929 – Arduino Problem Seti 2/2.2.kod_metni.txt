@@ -1,0 +1,52 @@
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+#include <Servo.h>
+
+
+char auth[] = "sGZKKvXvlWzSFArNFdkEwEyz7x19hkuk"; 
+char ssid[] = "SUPERONLINE_WiFi_6374";
+char pass[] = "RNEHCU4JRRXF"; 
+
+
+Servo servo;
+Servo servo1;
+Servo servo2;
+
+BLYNK_WRITE(V2)
+{
+  servo.write(param.asInt());
+}
+
+BLYNK_WRITE(V0)
+{
+  servo1.write(param.asInt());
+}
+
+BLYNK_WRITE(V1)
+{
+  servo2.write(param.asInt());
+}
+
+/*BLYNK_WRITE(V2)
+{
+  servo3.write(param.asInt());
+}
+*/
+void setup()
+{
+  Serial.begin(9600);
+
+  Blynk.begin(auth, ssid, pass);
+  
+
+  servo.attach(D0);
+  servo1.attach(D1);
+  servo2.attach(D2);
+
+}
+
+void loop()
+{
+  Blynk.run();
+}

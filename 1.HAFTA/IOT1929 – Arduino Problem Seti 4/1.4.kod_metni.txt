@@ -1,0 +1,37 @@
+#define POT A0
+#define DC 7
+#define LED 8
+
+int Pot_Deger=0;
+int Rpm_Deger=0;
+  
+void setup()
+{
+      pinMode(DC,OUTPUT);
+      pinMode(LED,OUTPUT);
+      Serial.begin(9600);
+}
+
+void loop()
+{
+   Pot_Deger=analogRead(POT);
+   Pot_Deger= map(Pot_Deger, 0, 1023, 0, 255);
+      
+   analogWrite(DC,Pot_Deger);
+      
+   Rpm_Deger=map(Pot_Deger, 0, 255, 0, 5555); 
+   
+      
+   if(Rpm_Deger>3000)
+   {
+     digitalWrite(LED, HIGH);
+   }  
+   
+   else
+   { 
+     digitalWrite(LED,LOW);
+   }
+   Serial.println(" HIZ: " + String(Rpm_Deger)); 
+  
+   delay(250);
+} 
